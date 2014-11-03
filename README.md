@@ -88,3 +88,28 @@ SeaJS 的实现方式是，和原生 JavaScript 类似，暴露 prototype, 插�
         // 添加新方法
         Module.prototype.extend = ...
     });
+    
+###Part4
+---
+
+###模块书写格式
+
+作为模块加载器，需要明确模块应该怎样写，这就是模块书写格式（Module Authoring Format）。
+
+对于文件加载器来说，约定非常少，比如 LABjs 只约定文件里不能有 document.write 等语句。
+
+RequireJS 遵守的是 [AMD](http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition) 规范，SeaJS 遵守的是 [Simple Wrappings](http://www.seajs.org) 规范。
+
+从表面上看，AMD 规范和 Wrappings 规范最大的不同是 factory 函数的参数不一样:
+
+    // 两者的基本格式都是：
+    define(id?, denpendencies?, factory);
+
+    // 在 AMD 中，factory 的参数由 dependencies 指定：
+    define(['a'], function(a) {
+    });
+
+    // 在 Wrappings 中，factory 的参数始终是 require, exports, module 三个：
+    define(function(require, exports, module) {
+         var a = require('a');
+    });
