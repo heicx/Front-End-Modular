@@ -1,4 +1,4 @@
-define("mod1", function(require, exports, module){
+define(function(require, exports, module){
 	//cmd with modular id
 	var geoCoding = function(){
 		console.log("ensure the location.");
@@ -9,7 +9,7 @@ define("mod1", function(require, exports, module){
 	}
 
 	module.exports = {
-		"change" : changePage,
-		"geo" : geoCoding
+		change : changePage,
+		geo : geoCoding
 	};
 })

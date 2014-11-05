@@ -7,7 +7,7 @@ if(define && define.amd !== undefined){
 }else{
 	//cmd
 	define(function(require, exports, module){
-		console.log(define.cmd);
+		var mod1 = require("./mod1");
 		mod1.change();
 	})
 }
