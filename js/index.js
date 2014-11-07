@@ -1,8 +1,9 @@
 if(define && define.amd !== undefined){
 	//amd
-	define("index", ["mod1"], function(mod1){
+	define("index", ["mod1", "config"], function(mod1, config){
 		console.log(define.amd);
 		mod1.geo();
+		config.check_location();
 	})
 }else{
 	//cmd
