@@ -1,0 +1,85 @@
+<!DOCTYPE html>  
+<html>
+<head>
+<title>Geolocation API Example</title>
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<script type="text/javascript">
+
+function setText(val, e) {
+    document.getElementById(e).value = val;
+}
+
+function insertText(val, e) {
+    document.getElementById(e).value += val;
+}
+
+var nav = null; 
+
+function requestPosition() {
+  if (nav == null) {
+      nav = window.navigator;
+  }
+  if (nav != null) {
+      var geoloc = nav.geolocation;
+      if (geoloc != null) {
+          geoloc.getCurrentPosition(successCallback, errorCallback);
+      }
+      else {
+          alert("Geolocation not supported");
+      }
+  }
+  else {
+      alert("Navigator not found");
+  }
+}
+
+
+
+function successCallback(position)
+{
+   setText(position.coords.latitude, "latitude");
+   setText(position.coords.longitude, "longitude");
+}
+
+ 
+function errorCallback(error) {
+    var message = "";  
+
+    // Check for known errors
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+          message = "This website does not have permission to use " + 
+                    "the Geolocation API";
+          break;
+       case error.POSITION_UNAVAILABLE:
+          message = "The current position could not be determined.";
+          break;
+       case error.TIMEOUT:
+          message = "The current position could not be determined " + 
+                    "within the specified timeout period.";            
+          break;
+    }
+
+    // If it is an unknown error, build a message that includes 
+    // information that helps identify the situation so that 
+    // the error handler can be updated.
+    if (message == "")
+    {
+        var strErrorCode = error.code.toString();
+        message = "The position could not be determined due to " + 
+                  "an unknown error (Code: " + strErrorCode + ").";
+    }
+    alert(message);
+
+}
+
+
+</script>
+</head>
+<body>
+<label for="latitude">Latitude: </label><input id="latitude" /> <br />
+<label for="longitude">Longitude: </label><input id="longitude" /> <br />
+<input type="button" onclick="requestPosition()" value="Get Latitude and Longitude"  /> 
+
+</body>
+</html>

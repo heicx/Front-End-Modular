@@ -1,9 +1,11 @@
 if(define && define.amd !== undefined){
 	//amd
-	define("index", ["mod1", "config"], function(mod1, config){
-		console.log(define.amd);
-		mod1.geo();
-		config.check_location();
+	define("index", ["mod1", "config", "../lib/zepto"], function(mod1, config, $){
+		//console.log(define.amd);
+		//mod1.geo();
+		$(function(){		
+			config.check_location();
+		})
 	})
 }else{
 	//cmd

@@ -13,6 +13,7 @@ define(function(require, exports, module){
 	}
 
 	function successCallback(position){  
+		cosnole.log(position);
 	    var output="";  
 	    output +="Your position has bean located . \r\n";  
 	    output+=" Latitude:"+position.coords.latitude+" ";  
