@@ -1,4 +1,5 @@
 define(function(require, exports, module){
+	require("../lib/zepto");
 	var check_location=function(){  
 	    var options={  
 	            enableHighAccuracy:true,  
@@ -8,12 +9,11 @@ define(function(require, exports, module){
 	    if(window.navigator.geolocation){  
 	        navigator.geolocation.getCurrentPosition(successCallback,errorCallback,options);  
 	    }else{  
-	        alert("你的浏览器不支持定位!");  
+	        console.log("你的浏览器不支持定位!");  
 	    }  
 	}
 
 	function successCallback(position){  
-		cosnole.log(position);
 	    var output="";  
 	    output +="Your position has bean located . \r\n";  
 	    output+=" Latitude:"+position.coords.latitude+" ";  
@@ -29,22 +29,39 @@ define(function(require, exports, module){
 	        output+=" Speed :"+position.coords.Speed +" m/s";  
 	    }  
 	    output+=" Time of Position "+position.timestamp +" m/s";  
-	    alert(output);  
+	    console.log(output);  
 	}  
 	function errorCallback(error){  
 	   switch(error.code){  
 	   case error.PERMISSION_DENIED:  
-	       alert("you have denied access to your position .");  
+	       console.log("you have denied access to your position .");  
 	       break;  
 	   case error.POSITION_UNAVAILABLE:  
-	       alert("there was a problem getting yout position .");  
+	       console.log("there was a problem getting yout position .");  
 	       break;  
 	   case error.TIMEOUT:  
-	       alert("The application has timed out attempting to get your location .");  
+	       console.log("The application has timed out attempting to get your location .");  
 	       break;  
 	         
 	   }  
-	}  
+	}
+
+	var config = {
+		"host" : $.extend({}, {name: "sss"}, {name: "ddd"}),
+		"address" : {
+			"api" : "/test/main"
+		}
+	};
+
+	console.log(config.host);
+
+	var request = {
+		"ajax" : {
+			"getData" : function(){
+
+			}
+		}
+	};
 
 	exports.check_location = check_location;	
 })
