@@ -46,22 +46,5 @@ define(function(require, exports, module){
 	   }  
 	}
 
-	var config = {
-		"host" : $.extend({}, {name: "sss"}, {name: "ddd"}),
-		"address" : {
-			"api" : "/test/main"
-		}
-	};
-
-	console.log(config.host);
-
-	var request = {
-		"ajax" : {
-			"getData" : function(){
-
-			}
-		}
-	};
-
 	exports.check_location = check_location;	
 })
