@@ -131,3 +131,10 @@ RequireJS 遵守的是 [AMD](http://wiki.commonjs.org/wiki/Modules/AsynchronousD
     define(function(require, exports, module) {
          var a = require('a');
     });
+
+###Part5
+---
+
+###前端项目打包发布脚手架的使用
+
+The JavaScript Task Runner [grunt.js](http://www.gruntjs.com)，上千个插件供于选择，基于Node环境，可以通过NPM安装。可以单独安装，也可以通过对package.json的配置来安装。
