@@ -139,3 +139,5 @@ RequireJS 遵守的是 [AMD](http://wiki.commonjs.org/wiki/Modules/AsynchronousD
 
 The JavaScript Task Runner [grunt.js](http://www.gruntjs.com)，上千个插件供于选择，基于Node环境，可以通过NPM安装。可以单独安装，也可以通过对package.json的配置来安装。
 在针对sea.js前端项目压缩合并打包时，需要将alias依赖关系注入到package.json文件中，在执行grunt xxx命令式时会自动解析补全 define 的 CommonJS规范语法。
+grunt.js是健壮，扩展性强，支持全面的一个前端构建脚手架，具有类似实现的有FIS及Gulp.js等等。
+FIS的使用，目前有针对require.js版本项目实现打包方案的mod.js.
