@@ -1,10 +1,10 @@
 ## 从 RequireJS 到 SeaJS
 
-### Part1
+### Part1 定位介绍
 ---
-从 requirejs.org 首页可以得知，RequireJS 是一个 JavaScript 文件和模块加载器，特别为浏览器优化，同时也可运行在 Rhino 和 Node 环境中。
 
-SeaJS 的定位是一个适用于浏览器端的 JavaScript 模块加载器。
+- 从 requirejs.org 首页可以得知，RequireJS 是一个 JavaScript 文件和模块加载器，特别为浏览器优化，同时也可运行在 Rhino 和 Node 环境中。
+- SeaJS 的定位是一个适用于浏览器端的 JavaScript 模块加载器。
 
 不要小看这两句话，任何类库/框架的定位，或者说愿景/目标，最终会决定该类库/框架的方方面面。比如：
 
@@ -41,7 +41,7 @@ order 功能是 JavaScript 文件加载器必备的功能，RequireJS 有文件�
 
 SeaJS 推荐用组合的思路解决问题：LABjs + SeaJS = JavaScript 文件和模块加载器。
 
-### Part2
+### Part2 组成部分
 ---
 
 - RequireJS 提供了三个文件：
@@ -61,14 +61,11 @@ SeaJS 推荐用组合的思路解决问题：LABjs + SeaJS = JavaScript 文件�
     spm 等优化和支持工具。
     
 
-### Part3
+### Part3 插件
 ---
-    
-- 插件
 
-RequireJS 提供了一系列插件：text, order, domReady, cs, i18n.
-
-SeaJS 默认只支持 js 和 css 模块，通过 text、coffee 和 less 插件来扩展支持的模块类型。
+- RequireJS 提供了一系列插件：text, order, domReady, cs, i18n.
+- SeaJS 默认只支持 js 和 css 模块，通过 text、coffee 和 less 插件来扩展支持的模块类型。
 
 SeaJS 还提供了 map 插件，方便开发调试：在线本地调试大观。对于 order 功能，推荐组合使用 LABjs 来实现。需要 domReady 时，则使用 jQuery 库。至于 i18n, 感觉放在模块加载框架里不太合适，可以做成独立的国际化模块。
 
@@ -115,15 +112,11 @@ Sea.js官方提供了7个插件，对Sea.js的功能进行了补充。
 
 由此可见，Sea.js的插件主要是解决一些附加问题，或者是给Sea.js添加一些额外的功能。私觉得有些功能并不合适让Sea.js来处理。
 
-### Part4
+### Part4 模块书写格式
 ---
 
-- 模块书写格式
-
 作为模块加载器，需要明确模块应该怎样写，这就是模块书写格式（Module Authoring Format）。
-
 对于文件加载器来说，约定非常少，比如 LABjs 只约定文件里不能有 document.write 等语句。
-
 RequireJS 遵守的是 [AMD](http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition) 规范，SeaJS 遵守的是 [Simple Wrappings](http://www.seajs.org) 规范。
 
 从表面上看，AMD 规范和 Wrappings 规范最大的不同是 factory 函数的参数不一样：
@@ -142,10 +135,8 @@ RequireJS 遵守的是 [AMD](http://wiki.commonjs.org/wiki/Modules/AsynchronousD
     });
 ```
 
-### Part5
+### Part5 前端项目打包发布脚手架的使用
 ---
-
-- 前端项目打包发布脚手架的使用
 
 The JavaScript Task Runner [grunt.js](http://www.gruntjs.com)，上千个插件供于选择，基于Node环境，可以通过NPM安装。可以单独安装，也可以通过对package.json的配置来安装。
 在针对sea.js前端项目压缩合并打包时，需要将alias依赖关系注入到package.json文件中，在执行grunt xxx命令式时会自动解析补全 define 的 CommonJS规范语法。
