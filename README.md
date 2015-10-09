@@ -1,8 +1,3 @@
-title: 从require.js到sea.js
-date: 2015-10-09 10:58:37
-tags: javascript
----
-
 ## 从 RequireJS 到 SeaJS
 
 ### Part1
