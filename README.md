@@ -123,7 +123,7 @@ define(function(require) {
 ### Part5 前端项目打包发布脚手架的使用
 ---
 
-`The JavaScript Task Runner` [`grunt.js`](http://www.gruntjs.com)，上千个插件供于选择，基于 `Node` 环境，可以通过 `NPM` 安装。可以单独安装，也可以通过对 `package.json` 的配置来安装。  
-在针对 `sea.js` 前端项目压缩合并打包时，需要将 `alias` 依赖关系注入到 `package.json` 文件中，在执行 `grunt xxx` 命令式时会自动解析补全 `define` 的 `CommonJS` 规范语法。  
-`grunt.js`是健壮，扩展性强，支持全面的一个前端构建脚手架，具有类似实现的有 `FIS` 及 `Gulp.js` 等等。
-`FIS` 的使用，目前有针对 `require.js` 版本项目实现打包方案的 `mod.js`。
+- `The JavaScript Task Runner` [`grunt.js`](http://www.gruntjs.com)，上千个插件供于选择，基于 `Node` 环境，可以通过 `NPM` 安装。可以单独安装，也可以通过对 `package.json` 的配置来安装。  
+- 在针对 `sea.js` 前端项目压缩合并打包时，需要将 `alias` 依赖关系注入到 `package.json` 文件中，在执行 `grunt xxx` 命令式时会自动解析补全 `define` 的 `CommonJS` 规范语法。  
+- `grunt.js`是健壮，扩展性强，支持全面的一个前端构建脚手架，具有类似实现的有 `FIS` 及 `Gulp.js` 等等。  
+- `FIS` 的使用，目前有针对 `require.js` 版本项目实现打包方案的 `mod.js`。  
