@@ -63,26 +63,26 @@ define(function(require) {
 插件实现机制上，`RequireJS` 采用的是钩子模式：在 `require.js` 源码中，主动判断并调用插件代码。
 
 ``` javascript
-    // require.js
-    function callPlugin(pluginName, depManager) {
-    //...
-    }
+// require.js
+function callPlugin(pluginName, depManager) {
+//...
+}
 ```
 
 `SeaJS` 的实现方式是，和原生 `JavaScript` 类似，暴露 `prototype`, 插件开发者通过给 `prototype` 添加新方法或覆盖原有方法来实现插件功能：
 
 ``` javascript
-    // plugin-xx.js
-    define(funtion(require, exports, module) {
-        var Require = require.constructor;
-        var Module = module.constructor;
- 
-        // 覆盖原有方法
-        Require.prototype.resolve = ...
- 
-        // 添加新方法
-        Module.prototype.extend = ...
-    });
+// plugin-xx.js
+define(funtion(require, exports, module) {
+    var Require = require.constructor;
+    var Module = module.constructor;
+
+    // 覆盖原有方法
+    Require.prototype.resolve = ...
+
+    // 添加新方法
+    Module.prototype.extend = ...
+});
 ```
 
 `Sea.js` 官方提供了 `7` 个插件，对 `Sea.js` 的功能进行了补充。
@@ -107,17 +107,17 @@ define(function(require) {
 从表面上看，`AMD` 规范和 `Wrappings` 规范最大的不同是 `factory` 函数的参数不一样：
 
 ``` javascript
-    // 两者的基本格式都是：
-    define(id?, denpendencies?, factory);
+// 两者的基本格式都是：
+define(id?, denpendencies?, factory);
 
-    // 在 AMD 中，factory 的参数由 dependencies 指定：
-    define(['a'], function(a) {
-    });
+// 在 AMD 中，factory 的参数由 dependencies 指定：
+define(['a'], function(a) {
+});
 
-    // 在 Wrappings 中，factory 的参数始终是 require, exports, module 三个：
-    define(function(require, exports, module) {
-         var a = require('a');
-    });
+// 在 Wrappings 中，factory 的参数始终是 require, exports, module 三个：
+define(function(require, exports, module) {
+     var a = require('a');
+});
 ```
 
 ### Part5 前端项目打包发布脚手架的使用
