@@ -2,63 +2,55 @@
 
 ### Part1 定位介绍
 ---
+- 从 `requirejs.org` 首页可以得知，`RequireJS` 是一个 `JavaScript` 文件和模块加载器，特别为浏览器优化，同时也可运行在 `Rhino` 和 `Node` 环境中。
+- `SeaJS` 的定位是一个适用于浏览器端的 `JavaScript` 模块加载器。
 
-- 从 requirejs.org 首页可以得知，RequireJS 是一个 JavaScript 文件和模块加载器，特别为浏览器优化，同时也可运行在 Rhino 和 Node 环境中。
-- SeaJS 的定位是一个适用于浏览器端的 JavaScript 模块加载器。
-
-不要小看这两句话，任何类库/框架的定位，或者说愿景/目标，最终会决定该类库/框架的方方面面。比如：
-
-RequireJS 的定位中，除了是模块加载器，还是文件加载器，这决定了 RequireJS 需要实现类似 LABjs 等 script loader 的功能。LABjs 的核心功能是异步加载脚本并提供运行的依赖等待。
+不要小看这两句话，任何类库/框架的定位，或者说愿景/目标，最终会决定该类库/框架的方方面面。比如：  
+`RequireJS` 的定位中，除了是模块加载器，还是文件加载器，这决定了 `RequireJS` 需要实现类似 `LABjs` 等 `script loader` 的功能。`LABjs` 的核心功能是异步加载脚本并提供运行的依赖等待。
 
 ``` javascript
-    $LAB
-    .script("a.js")
-    .script("b.js").wait()
-    .script("c.js");
+$LAB
+.script("a.js")
+.script("b.js").wait()
+.script("c.js");
 ```
 
-为了提供类似功能，RequireJS 开发了 order 插件:
-
+为了提供类似功能，`RequireJS` 开发了 `order` 插件:  
 ``` javascript
-    require(["order!one.js", "order!two.js", "order!three.js"], function () {
-        //This callback is called after the three scripts finish loading.
-    });
+require(["order!one.js", "order!two.js", "order!three.js"], function () {
+    //This callback is called after the three scripts finish loading.
+});
 ```
 
-order 功能是 JavaScript 文件加载器必备的功能，RequireJS 有文件加载器的定位，因此才有了 order 插件的设计。
+`order` 功能是 `JavaScript` 文件加载器必备的功能，`RequireJS` 有文件加载器的定位，因此才有了 `order` 插件的设计。
 
-而对于 SeaJS 来说，定位为很纯粹的模块加载器，因此不需要考虑普通脚本的 order 加载，如果需要脚本加载功能，直接和 LABjs 一块用就好：
+而对于 `SeaJS` 来说，定位为很纯粹的模块加载器，因此不需要考虑普通脚本的 `order` 加载，如果需要脚本加载功能，直接和 `LABjs` 一块用就好：
 
 ``` javascript
-    define(function(require) {
+define(function(require) {
     var $LAB = require('labjs/2.0.3/lab.js');
+    
     $LAB
-      .script('a.js')
-      .script('b.js').wait()
-      .scrpt('c.js');
-    );
+    .script('a.js')
+    .script('b.js').wait()
+    .scrpt('c.js');
+});
 ```
 
-SeaJS 推荐用组合的思路解决问题：LABjs + SeaJS = JavaScript 文件和模块加载器。
+`SeaJS` 推荐用组合的思路解决问题：`LABjs + SeaJS = JavaScript` 文件和模块加载器。
 
 ### Part2 组成部分
 ---
 
-- RequireJS 提供了三个文件：
+- `RequireJS` 提供了三个文件：  
+    `require.js` - 核心文件，提供 `JavaScript` 文件和模块加载功能。  
+    `require-jquery.js` - 打包了 `jquery` 最新版本的 `require.js`。  
+    `r.js` — 优化工具，以及让 `RequireJS` 的模块可运行于 `Node` 和 `Rhino` 环境。  
 
-    require.js — 这是核心文件，提供 JavaScript 文件和模块加载功能。
-
-    require-jquery.js — 打包了 jquery 最新版本的 require.js
-
-     r.js — 优化工具，以及让 RequireJS 的模块可运行于 Node 和 Rhino 环境。
-
-- SeaJS 提供的内容，目前也有三部分：
-
-     sea.js — 模块加载器。
-
-     modules — 可运行在 seajs 环境中的推荐模块，在这里下载 modules.seajs.com
-
-    spm 等优化和支持工具。
+- `SeaJS` 提供的内容，目前也有三部分：  
+    `sea.js` — 模块加载器。  
+    `modules` — 可运行在 `seajs` 环境中的推荐模块，在这里下载 [`modules.seajs.com`](http://modules.seajs.com) 。  
+    `spm` 等优化和支持工具。
     
 
 ### Part3 插件
