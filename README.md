@@ -56,12 +56,11 @@ define(function(require) {
 ### Part3 插件
 ---
 
-- RequireJS 提供了一系列插件：text, order, domReady, cs, i18n.
-- SeaJS 默认只支持 js 和 css 模块，通过 text、coffee 和 less 插件来扩展支持的模块类型。
+- `RequireJS` 提供了一系列插件：`text, order, domReady, cs, i18n`。
+- `SeaJS` 默认只支持 `js` 和 `css` 模块，通过 `text, coffee, less` 插件来扩展支持的模块类型。
 
-SeaJS 还提供了 map 插件，方便开发调试：在线本地调试大观。对于 order 功能，推荐组合使用 LABjs 来实现。需要 domReady 时，则使用 jQuery 库。至于 i18n, 感觉放在模块加载框架里不太合适，可以做成独立的国际化模块。
-
-插件实现机制上，RequireJS 采用的是钩子模式：在 require.js 源码中，主动判断并调用插件代码。
+`SeaJS` 还提供了 `map` 插件，方便开发调试：在线本地调试大观。对于 `order` 功能，推荐组合使用 `LABjs` 来实现。需要 `domReady` 时，则使用 `jQuery` 库。至于 `i18n`, 感觉放在模块加载框架里不太合适，可以做成独立的国际化模块。  
+插件实现机制上，`RequireJS` 采用的是钩子模式：在 `require.js` 源码中，主动判断并调用插件代码。
 
 ``` javascript
     // require.js
@@ -70,7 +69,7 @@ SeaJS 还提供了 map 插件，方便开发调试：在线本地调试大观。
     }
 ```
 
-SeaJS 的实现方式是，和原生 JavaScript 类似，暴露 prototype, 插件开发者通过给 prototype 添加新方法或覆盖原有方法来实现插件功能：
+`SeaJS` 的实现方式是，和原生 `JavaScript` 类似，暴露 `prototype`, 插件开发者通过给 `prototype` 添加新方法或覆盖原有方法来实现插件功能：
 
 ``` javascript
     // plugin-xx.js
@@ -86,32 +85,26 @@ SeaJS 的实现方式是，和原生 JavaScript 类似，暴露 prototype, 插�
     });
 ```
 
-Sea.js官方提供了7个插件，对Sea.js的功能进行了补充。
+`Sea.js` 官方提供了 `7` 个插件，对 `Sea.js` 的功能进行了补充。
 
-- seajs-text：用来加载HTML或者模板文件。
+- `seajs-text`：用来加载 `HTML` 或者模板文件。
+- `seajs-style`：提供了 `importStyle`，动态地向页面中插入 `css`。  
+- `seajs-combo`：该插件提供了依赖combo的功能，能把多个依赖的模块uri combo，减少HTTP请求。  
+- `seajs-flush`：该插件是对 `seajs-combo` 的补充，或者是大杀器，可以先 hold 住前面的模块请求，最后将请求的模块 `combo` 成一个 `url`，一次加载 hold 住的模块。  
+- `seajs-debug`：`Fiddler` 用过么？这个插件基本就是提供了这样一种功能，可以通过修改 `config`，将线上文件 `proxy` 到本地服务器，便于线上开发调试和排错。  
+- `seajs-log`：提供一个 `seajs.log API`，私觉得比较鸡肋。  
+- `seajs-health`：目标功能是，分析当前网页的模块健康情况。  
 
-- seajs-style：提供了importStyle，动态地向页面中插入css。
-
-- seajs-combo：该插件提供了依赖combo的功能，能把多个依赖的模块uri combo，减少HTTP请求。
-
-- seajs-flush：该插件是对seajs-combo的补充，或者是大杀器，可以先hold住前面的模块请求，最后将请求的模块combo成一个url，一次加载hold住的模块。
-
-- seajs-debug：Fiddler用过么？这个插件基本就是提供了这样一种功能，可以通过修改config，将线上文件proxy到本地服务器，便于线上开发调试和排错。
-
-- seajs-log：提供一个seajs.log API，私觉得比较鸡肋。
-
-- seajs-health：目标功能是，分析当前网页的模块健康情况。
-
-由此可见，Sea.js的插件主要是解决一些附加问题，或者是给Sea.js添加一些额外的功能。私觉得有些功能并不合适让Sea.js来处理。
+由此可见，`Sea.js` 的插件主要是解决一些附加问题，或者是给 `Sea.js` 添加一些额外的功能。私觉得有些功能并不合适让 `Sea.js` 来处理。
 
 ### Part4 模块书写格式
 ---
 
-作为模块加载器，需要明确模块应该怎样写，这就是模块书写格式（Module Authoring Format）。
-对于文件加载器来说，约定非常少，比如 LABjs 只约定文件里不能有 document.write 等语句。
-RequireJS 遵守的是 [AMD](http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition) 规范，SeaJS 遵守的是 [Simple Wrappings](http://www.seajs.org) 规范。
+作为模块加载器，需要明确模块应该怎样写，这就是模块书写格式`（Module Authoring Format）`。  
+对于文件加载器来说，约定非常少，比如 `LABjs` 只约定文件里不能有 `document.write` 等语句。  
+`RequireJS` 遵守的是 [`AMD`](http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition) 规范，`SeaJS` 遵守的是 [`Simple Wrappings`](http://www.seajs.org) 规范。  
 
-从表面上看，AMD 规范和 Wrappings 规范最大的不同是 factory 函数的参数不一样：
+从表面上看，`AMD` 规范和 `Wrappings` 规范最大的不同是 `factory` 函数的参数不一样：
 
 ``` javascript
     // 两者的基本格式都是：
@@ -130,8 +123,7 @@ RequireJS 遵守的是 [AMD](http://wiki.commonjs.org/wiki/Modules/AsynchronousD
 ### Part5 前端项目打包发布脚手架的使用
 ---
 
-The JavaScript Task Runner [grunt.js](http://www.gruntjs.com)，上千个插件供于选择，基于Node环境，可以通过NPM安装。可以单独安装，也可以通过对package.json的配置来安装。
-在针对sea.js前端项目压缩合并打包时，需要将alias依赖关系注入到package.json文件中，在执行grunt xxx命令式时会自动解析补全 define 的 CommonJS规范语法。
-
-grunt.js是健壮，扩展性强，支持全面的一个前端构建脚手架，具有类似实现的有FIS及Gulp.js等等。
-FIS的使用，目前有针对require.js版本项目实现打包方案的mod.js.
+`The JavaScript Task Runner` [`grunt.js`](http://www.gruntjs.com)，上千个插件供于选择，基于 `Node` 环境，可以通过 `NPM` 安装。可以单独安装，也可以通过对 `package.json` 的配置来安装。  
+在针对 `sea.js` 前端项目压缩合并打包时，需要将 `alias` 依赖关系注入到 `package.json` 文件中，在执行 `grunt xxx` 命令式时会自动解析补全 `define` 的 `CommonJS` 规范语法。  
+`grunt.js`是健壮，扩展性强，支持全面的一个前端构建脚手架，具有类似实现的有 `FIS` 及 `Gulp.js` 等等。
+`FIS` 的使用，目前有针对 `require.js` 版本项目实现打包方案的 `mod.js`。
